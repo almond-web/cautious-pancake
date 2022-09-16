@@ -1,25 +1,32 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
 import s from './Dialogs.module.css';
 import Message from '../Message/Message';
 import User from '../User/User';
 
 const Dialogs = (props) => {
-    let userData = [{name:'Ira', id:'1'},{name:'Marina', id:'2'},{name:'Sveta', id:'3'}]
-    let messageData = [{message:'Hi!', id:'1'},{message:'Hi! How are you?', id:'2'},{message:'Fine, thanks.', id:'3'}]
+    let userMapArray = props.state.userData.map(user=><User name={user.name} id={user.id} avatar={user.avatar}/>)
+    let messageMapArray = props.state.messageData.map(message=><Message message={message.message} />)
+    
+    let addMassege = () => {
+        let text=newMessage.current.value;
+        alert(text)};
 
-    let userNewArray = userData.map(user=><User name={user.name} id={user.id}/>)
-    let messageNewArray = messageData.map(message=><Message message={message.message} />)
+    let newMessage=React.createRef();
 
     return (
+        
         <div className={s.dialogs}>
             <div>
-                {userNewArray}
+                {userMapArray}
             </div>
             <div>
-                {messageNewArray}
+                {messageMapArray}
             </div>
+            <div> 
+              <textarea ref={newMessage}></textarea>
+            </div>
+           <div><button onClick={addMassege}>Add message</button></div>
+       
         </div>
     )
 }
